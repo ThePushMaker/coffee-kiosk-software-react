@@ -9,7 +9,7 @@ export default function Layout() {
     <div className='md:flex'>
       <Sidebar />
       
-      <main className='flex-1'>
+      <main className='flex-1 h-screen overflow-y-scroll bg-gray-100 p-3'>
         <Outlet />
       </main>
       
