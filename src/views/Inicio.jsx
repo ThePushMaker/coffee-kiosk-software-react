@@ -1,7 +1,12 @@
 import Producto from '../components/Producto.jsx'
 import { productos } from '../data/productos.js'
+import useQuiosco from '../hooks/useQuiosco.js'
 
 export default function Inicio() {
+  const {autenticado} = useQuiosco()
+  
+  console.log(autenticado)
+  
   return (
     <>
       <h1 className='text-4xl font-black'>Inicio</h1>
