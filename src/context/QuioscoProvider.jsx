@@ -6,11 +6,18 @@ const QuioscoContext = createContext();
 const QuioscoProvider = ({children}) => {
   
   const [categorias, setCategorias] = useState(categoriasDB)
+  const [categoriaActual, setCategoriaActual] = useState(categorias[0])
+  
+  const handleClickCategoria = (id) => {
+    console.log('click')
+  }
   
   return (
     <QuioscoContext.Provider
       value={{
-        categorias
+        categorias,
+        categoriaActual,
+        handleClickCategoria
       }}
     >
       {children}
