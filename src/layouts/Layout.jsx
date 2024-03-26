@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Modal from 'react-modal'
 import Sidebar from '../components/Sidebar'
 import Resumen from '../components/Resumen'
+import ModalProducto from '../components/ModalProducto'
 import useQuiosco from '../hooks/useQuiosco'
 
 const customStyles = {
@@ -15,6 +16,9 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
+
+// agregamos el modal al #root para que no genere error en consola
+Modal.setAppElement('#root')
 
 export default function Layout() {
   const {modal, handleClickModal} = useQuiosco()
@@ -32,19 +36,10 @@ export default function Layout() {
         
       </div>
       
-      {modal && (
-        <Modal 
-          isOpen={modal} 
-          style={customStyles}
-        >
-          <p>Desde modal</p>
-          <button
-            onClick={() => handleClickModal()}
-          >
-            Cerrar
-          </button>
-        </Modal>
-      )}
+    
+      <Modal isOpen={modal} style={customStyles}>
+        <ModalProducto />
+      </Modal>
       
     </>
   )
