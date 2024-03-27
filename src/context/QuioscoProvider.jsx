@@ -26,7 +26,17 @@ const QuioscoProvider = ({children}) => {
   }
   
   const handleAgregarPedido = ({categoria_id, imagen, ...producto}) => {
-    setPedido([...pedido, producto])
+    if(pedido.some( pedidoState => pedidoState.id === producto.id )){
+      // itera sobre los productos en el estado e identifica si el producto ya fue agregado al pedido 
+      // y si es asi retorna producto, en caso contrario entonces retorna pedidoState (lo que ya tiene 
+      // en memoria)
+      const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === producto.id 
+        ? producto : pedidoState)
+      
+      setPedido(pedidoActualizado)
+    } else {
+      setPedido([...pedido, producto])
+    }
   }
   
   return (
