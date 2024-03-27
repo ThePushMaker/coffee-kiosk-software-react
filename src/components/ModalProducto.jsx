@@ -1,10 +1,22 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useQuiosco from "../hooks/useQuiosco"
 import {formatearDinero} from "../helpers"
 
 export default function ModalProducto() {
-  const { producto, handleClickModal, handleAgregarPedido} = useQuiosco()
+  const { producto, handleClickModal, handleAgregarPedido, pedido} = useQuiosco()
   const [cantidad, setCantidad] = useState(1)
+  const [edicion, setEdicion] = useState(false)
+  
+  useEffect(() => {
+    // identifica si el producto ya fue agregado al pedido y si es asi extrae los datos del producto 
+    // y toma el valor de la cantidad del pedido y la muestra en el modal a través del estado
+    if(pedido.some( pedidoState => pedidoState.id === producto.id )){
+      const productoEdicion = pedido.filter(pedidoState => pedidoState.id === producto.id)[0]
+      
+      setCantidad(productoEdicion.cantidad)
+      setEdicion(true)
+    }
+  }, [pedido])
   
   return (
     <div className="md:flex items-center gap-10">
@@ -76,7 +88,7 @@ export default function ModalProducto() {
             handleClickModal()              
           }}
         >
-          Añadir al pedido
+          {edicion ? 'Guardar Cambios' : 'Añadir al Pedido'}
         </button>
         
       </div>
