@@ -48,6 +48,14 @@ const QuioscoProvider = ({children}) => {
     setModal(!modal)
   }
   
+  const handleEliminarProductoPedido = id => {
+    // obtiene todos los pedidos que sean diferentes al que queremos eliminar y actualiza el estado
+    // con estos
+    const pedidoActualizado = pedido.filter(producto => producto.id !== id)
+    setPedido(pedidoActualizado)
+    toast.success('Eliminado del Pedido')
+  }
+  
   return (
     <QuioscoContext.Provider
       value={{
@@ -60,7 +68,8 @@ const QuioscoProvider = ({children}) => {
         handleSetProducto,
         pedido,
         handleAgregarPedido,
-        handleEditarCantidad
+        handleEditarCantidad,
+        handleEliminarProductoPedido
       }}
     >
       {children}
