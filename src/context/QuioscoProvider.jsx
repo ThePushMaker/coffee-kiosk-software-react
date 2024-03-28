@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 import { categorias as categoriasDB } from '../data/categorias'
 
@@ -11,6 +11,17 @@ const QuioscoProvider = ({children}) => {
   const [modal, setModal] = useState(false)
   const [producto, setProducto] = useState({})
   const [pedido, setPedido] = useState([])
+  const [total, setTotal] = useState(0)
+  
+  useEffect(() => {
+    // tiene dos parametros, total es un acumulado, producto es el elemento sobre el cual está iterando
+    // multiplica el precio por la cantidad para obtener el subtotal de cada producto y lo suma al total
+    // incrementando en cada iteración
+    // se define que el valor de inicio es 0
+    const nuevoTotal = pedido.reduce( (total, producto) => (producto.precio * producto.cantidad)
+    + total, 0 )
+    setTotal(nuevoTotal)
+  }, [pedido])
   
   const handleClickCategoria = id => {
     const categoria = categorias.filter(categoria => categoria.id === id)[0]
@@ -69,7 +80,8 @@ const QuioscoProvider = ({children}) => {
         pedido,
         handleAgregarPedido,
         handleEditarCantidad,
-        handleEliminarProductoPedido
+        handleEliminarProductoPedido,
+        total
       }}
     >
       {children}
