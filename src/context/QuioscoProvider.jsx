@@ -26,7 +26,7 @@ const QuioscoProvider = ({children}) => {
     setProducto(producto)
   }
   
-  const handleAgregarPedido = ({categoria_id, imagen, ...producto}) => {
+  const handleAgregarPedido = ({categoria_id,...producto}) => {
     if(pedido.some( pedidoState => pedidoState.id === producto.id )){
       // itera sobre los productos en el estado e identifica si el producto ya fue agregado al pedido 
       // y si es asi retorna producto, en caso contrario entonces retorna pedidoState (lo que ya tiene 
@@ -42,6 +42,12 @@ const QuioscoProvider = ({children}) => {
     }
   }
   
+  const handleEditarCantidad = id => {
+    const productoActualizar = pedido.filter(producto => producto.id === id)[0]
+    setProducto(productoActualizar)
+    setModal(!modal)
+  }
+  
   return (
     <QuioscoContext.Provider
       value={{
@@ -53,7 +59,8 @@ const QuioscoProvider = ({children}) => {
         producto,
         handleSetProducto,
         pedido,
-        handleAgregarPedido
+        handleAgregarPedido,
+        handleEditarCantidad
       }}
     >
       {children}
