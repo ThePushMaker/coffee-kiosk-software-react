@@ -1,14 +1,40 @@
+import {createRef, useState} from "react"
 import { Outlet } from "react-router-dom"
 import { Link } from "react-router-dom"
+import clienteAxios from "../config/axios"
 
 export default function Registro() {
+  const nameRef = createRef()
+  const emailRef = createRef()
+  const passwordRef = createRef()
+  const passwordConfirmationRef = createRef()
+  
+  const handleSubmit = async e => {
+    e.preventDefault()
+    
+    const datos = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      password_confirmation: passwordConfirmationRef.current.value
+    }
+    try {
+      const respuesta = await clienteAxios.post('/registro', datos)
+      console.log(respuesta)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+  
   return (
     <>
       <h1 className="text-4xl font-black">Crea tu cuenta</h1>
       <p>Crea tu cuenta llenando el formulario</p>
       
       <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
-        <form>
+        <form
+          onSubmit={handleSubmit}
+        >
           
           <div className="mb-4">
             <label
@@ -21,6 +47,7 @@ export default function Registro() {
               className="mt-2 w-full p-3 bg-gray-50"
               name="name"
               placeholder="Tu Nombre"
+              ref={nameRef}
             />
           </div>
           
@@ -35,6 +62,7 @@ export default function Registro() {
               className="mt-2 w-full p-3 bg-gray-50"
               name="email"
               placeholder="Tu Email"
+              ref={emailRef}
             />
           </div>
           
@@ -49,6 +77,7 @@ export default function Registro() {
               className="mt-2 w-full p-3 bg-gray-50"
               name="password"
               placeholder="Tu Contraseña"
+              ref={passwordRef}
             />
           </div>
           
@@ -63,6 +92,7 @@ export default function Registro() {
               className="mt-2 w-full p-3 bg-gray-50"
               name="password_confirmation"
               placeholder="Repetir Contraseña"
+              ref={passwordConfirmationRef}
             />
           </div>
           
