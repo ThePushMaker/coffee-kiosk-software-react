@@ -38,6 +38,8 @@ export default function Login() {
           onSubmit={handleSubmit}
           noValidate
         >
+        
+          {errores ? errores.map((error, i) => <Alerta key={i}>{error}</Alerta>) : null}
           
           <div className="mb-4">
             <label
@@ -72,7 +74,7 @@ export default function Login() {
           <input 
             type="submit"
             value='Iniciar Sesión'
-            className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer"
+            className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer rounded-lg"
           />
         </form>
       </div>
