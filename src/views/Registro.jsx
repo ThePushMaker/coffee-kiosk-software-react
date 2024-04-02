@@ -22,10 +22,9 @@ export default function Registro() {
       password_confirmation: passwordConfirmationRef.current.value
     }
     try {
-      const respuesta = await clienteAxios.post('/registro', datos)
-      console.log(respuesta)
+      const {data} = await clienteAxios.post('/registro', datos)
+      console.log(data.token)
     } catch (error) {
-      console.log(error)
       setErrores(Object.values(error.response.data.errors))
     }
   }
@@ -38,7 +37,6 @@ export default function Registro() {
       <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
         <form
           onSubmit={handleSubmit}
-          noValidate
         >
         
         {errores ? errores.map((error, i) => <Alerta key={i}>{error}</Alerta>) : null}
