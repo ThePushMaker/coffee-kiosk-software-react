@@ -25,6 +25,7 @@ export default function Registro() {
       const respuesta = await clienteAxios.post('/registro', datos)
       console.log(respuesta)
     } catch (error) {
+      console.log(error)
       setErrores(Object.values(error.response.data.errors))
     }
   }
