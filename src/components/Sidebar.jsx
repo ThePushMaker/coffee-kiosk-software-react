@@ -10,7 +10,7 @@ export default function Sidebar() {
     <aside className='md:w-72'>
       <div className='p-4'>
         <img
-          className='w-40'
+          className='w-40 mx-auto'
           src='img/logo.svg'
           alt='imagen logo'
         />
