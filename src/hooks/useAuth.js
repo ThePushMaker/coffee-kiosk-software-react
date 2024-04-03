@@ -32,8 +32,19 @@ export const useAuth = ({middleware, url}) => {
   const registro = () => {
     
   }
-  const logout = () => {
-    
+  const logout = async () => {
+    try {
+      await clienteAxios.post('/logout', null, {
+        headers: { 
+          Authorization: `Bearer ${token}`
+        }
+      })
+      localStorage.removeItem('AUTH_TOKEN')
+      // esto es porque useSWR cachea un poco, con undefined lo limpiamos al instante
+      await mutate(undefined)
+    } catch (error) {
+     throw Error(error?.response?.data?.errors) 
+    }
   }
   
   console.log(user)
