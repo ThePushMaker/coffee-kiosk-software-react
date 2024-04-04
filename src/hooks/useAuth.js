@@ -59,6 +59,15 @@ export const useAuth = ({middleware, url}) => {
       navigate(url)
     }
     
+    if(middleware === 'guest' && user && user.admin===1){
+      navigate('/admin')
+    }
+    
+    // si el middelware es de admin y tenemos un usuario, pero no es admin, entonces redirigimos al inicio
+    if(middleware === 'admin' && user && user.admin===0){
+      navigate('/')
+    }
+    
     // no hemos iniciado sesión
     if(middleware === 'auth' && error){
       navigate('/auth/login')
