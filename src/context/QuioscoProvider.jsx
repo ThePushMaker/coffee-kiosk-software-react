@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 import clienteAxios from '../config/axios'
+import { mutate } from 'swr';
 
 const QuioscoContext = createContext();
 
@@ -24,8 +25,13 @@ const QuioscoProvider = ({children}) => {
   }, [pedido])
   
   const obtenerCategorias = async () => {
+    const token = localStorage.getItem('AUTH_TOKEN')
     try {
-      const {data} = await clienteAxios('/categorias')
+      const {data} = await clienteAxios('/categorias', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       setCategorias(data)
       setCategoriaActual(data[0])
     } catch (error) {
@@ -123,8 +129,21 @@ const QuioscoProvider = ({children}) => {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }) 
-      console.log(id)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  const handleClickProductoAgotado = async id => {
+    const token = localStorage.getItem('AUTH_TOKEN')
+    
+    try {
+      await clienteAxios.put(`/productos/${id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
     } catch (error) {
       console.log(error)
     }
@@ -146,7 +165,8 @@ const QuioscoProvider = ({children}) => {
         handleEliminarProductoPedido,
         total,
         handleSubmitNuevaOrden,
-        handleClickCompletarPedido
+        handleClickCompletarPedido,
+        handleClickProductoAgotado
       }}
     >
       {children}

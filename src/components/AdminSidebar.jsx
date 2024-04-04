@@ -15,8 +15,8 @@ export default function AdminSidebar() {
       </div>
       
       <nav>
-        <Link to="admin" className="font-bold text-lg block p-4 hover:bg-amber-300">Ordenes</Link>
-        <Link to="admin/productos" className="font-bold text-lg block p-4 hover:bg-amber-300">Productos</Link>
+        <Link to="/admin" className="font-bold text-lg block p-4 hover:bg-amber-300">Ordenes</Link>
+        <Link to="/admin/productos" className="font-bold text-lg block p-4 hover:bg-amber-300">Productos</Link>
       </nav>
       
       <div className="my-5 px-5">
