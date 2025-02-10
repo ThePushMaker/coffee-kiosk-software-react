@@ -5,10 +5,8 @@ import Alerta from '../components/Alerta'
 import { useAuth } from "../hooks/useAuth"
 
 export default function Login() {
-  const nameRef = createRef()
   const emailRef = createRef()
   const passwordRef = createRef()
-  const passwordConfirmationRef = createRef()
   
   const [errores, setErrores] = useState([])
   
@@ -80,7 +78,7 @@ export default function Login() {
         </form>
       </div>
       
-      <nav className="mt-5">
+      <nav className="mt-5 text-indigo-500 hover:text-indigo-700">
         <Link to="/auth/registro">
           ¿No tienes cuenta? Crea una
         </Link>

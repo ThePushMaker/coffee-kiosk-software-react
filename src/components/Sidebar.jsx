@@ -11,7 +11,7 @@ export default function Sidebar() {
       <div className='p-4'>
         <img
           className='w-40 mx-auto'
-          src='img/logo.svg'
+          src='img/logo.png'
           alt='imagen logo'
         />
       </div>

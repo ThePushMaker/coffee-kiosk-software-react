@@ -2,14 +2,17 @@ import { Outlet } from "react-router-dom";
 
 export default function AuthLayout() {
   return (
-    <main className="max-w-4xl m-auto mt-10 md:mt-28 flex flex-col md:flex-row items-center">
-      <img 
-        src="../img/logo.svg"
-        alt="imagen logotipo" 
+    <main className="min-h-screen max-w-4xl m-auto flex flex-col md:flex-row items-center justify-center gap-11 p-10">
+    
+      {/* side image */}
+      <img
+        src="../img/logo.png"
+        alt="imagen logotipo"
         className="max-w-xs"
       />
       
-      <div className="p-10 w-full">
+      {/* side form */}
+      <div className="w-full">
         <Outlet />
       </div>
     </main>

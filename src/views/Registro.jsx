@@ -109,7 +109,7 @@ export default function Registro() {
         </form>
       </div>
       
-      <nav className="mt-5">
+      <nav className="mt-5 text-indigo-500 hover:text-indigo-700">
         <Link to="/auth/login">
           ¿Ya tienes cuenta? Inicia Sesión
         </Link>
